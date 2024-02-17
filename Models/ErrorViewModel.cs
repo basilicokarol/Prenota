@@ -1,4 +1,4 @@
-namespace prenota.Models;
+namespace Prenota.Models;
 
 public class ErrorViewModel
 {
