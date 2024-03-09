@@ -1,19 +1,16 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Prenota.Models;
+using prenota5H.Models;
 
-namespace Prenota.Controllers;
+namespace prenota5H.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
 
-    private static List<Utente> Utenti = new List<Utente>();
-
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
-      
     }
 
     public IActionResult Index()
@@ -25,15 +22,20 @@ public class HomeController : Controller
     {
         return View();
     }
-     public IActionResult Prenota()
+
+    
+    public IActionResult Prenota()
     {
         return View();
     }
+
     [HttpPost]
-     public IActionResult Prenotato( Utente u)
+    public IActionResult Prenotato(Utente u)
     {
-        Utenti.Add(u);
-        return View(Utenti);
+        Database db = new ();
+        db.Utenti.Add( u );
+        db.SaveChanges();
+        return View( db );
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
